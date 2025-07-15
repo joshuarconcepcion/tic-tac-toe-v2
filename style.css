@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Office";
+    src: url("/fonts/OfficeCodePro-Light copy.otf");
+}
+
+html, body {
+    height: 100%;
+    font-family: "Office";
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-title {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameboard {
+    width: clamp(450px, 45%, 630px);
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.cell {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
