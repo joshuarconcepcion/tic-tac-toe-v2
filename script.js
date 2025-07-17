@@ -24,8 +24,8 @@ const GameBoard = (function () {
 
 const GameController = (function () {
     const player1 = Player('Player1', 'X');
-    const player2 = Player('Player1', 'O');
-    let currentPlayer = Player1;
+    const player2 = Player('Player2', 'O');
+    let currentPlayer = player1;
 
     const switchPlayer = () => {
         currentPlayer = currentPlayer === player1 ? player2 : player1;
@@ -34,7 +34,7 @@ const GameController = (function () {
     const checkWin = () => {
         const board = GameBoard.getBoard();
         const wins = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8]
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
             [0, 3, 6], [1, 4, 7], [2, 5, 8],
             [0, 4, 8], [2, 4, 6]
         ];
@@ -44,12 +44,13 @@ const GameController = (function () {
 
     let isGameOver = false;
 
-    const playRound = () => {
-        if (isGameOver || GameBoard.getBoard[index] != '') {
+    const playRound = (index) => {
+        if (isGameOver || GameBoard.getBoard()[index] != '') {
             return;
         }
 
         GameBoard.markCell(index, currentPlayer.symbol);
+        DisplayController.render();
 
         if (checkWin()) {
             console.log(`${currentPlayer} has won!`)
@@ -60,5 +61,31 @@ const GameController = (function () {
         switchPlayer();
     }
 
+    const resetButton = document.querySelector('#reset-button');
+    resetButton.addEventListener('click', () => {
+        GameBoard.resetBoard();
+        DisplayController.render();
+    })
+
     return {checkWin, playRound}
+})();
+
+const DisplayController = (function () {
+    const cells = document.querySelectorAll('.cell');
+
+    cells.forEach((cell,index) => {
+        cell.addEventListener('click', () => {
+            GameController.playRound(index);
+        })
+    })
+
+    const render = () => {
+        const board = GameBoard.getBoard();
+
+        cells.forEach((cell, index) => {
+            cell.textContent = board[index];
+        })
+    }
+
+    return {render};
 })();

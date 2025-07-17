@@ -31,19 +31,45 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 2.5rem;
 }
 
 #gameboard {
-    width: clamp(450px, 45%, 630px);
+    width: 600px;
+    height: 600px;
     aspect-ratio: 1 / 1;
     border: 1px solid black;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    margin: 2%;
 }
 
 .cell {
+    aspect-ratio: 1 / 1;
     border: 1px solid black;
+    cursor: pointer;
+    font-size: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+}
+
+#game-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    width: 150px;
+    border: 1px solid black;
+    gap: 3rem;
+}
+
+#menu-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
